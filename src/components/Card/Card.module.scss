@@ -1,0 +1,54 @@
+@use '../../colors';
+
+.card {
+  margin-top: 20px;
+  margin-left: 20px;
+
+  &:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s;
+  }
+
+  display: flex;
+  width: 600px;
+  height: 100px;
+  align-items: center;
+  background-color: colors.$sidebar-color;
+  border-radius: 15px;
+  img {
+    height: 56px;
+    width: 56px;
+    margin-left: 5%;
+  }
+
+  .songInfo {
+    width: 64%;
+    margin-left: 40px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: colors.$yellow;
+
+    .name {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .artist {
+      margin: 0;
+    }
+  }
+
+  .likeButton {
+    font-size: large;
+    color: colors.$yellow;
+  }
+
+  .addButton {
+    font-size: large;
+    margin-left: 2%;
+    color: colors.$yellow;
+  }
+}

@@ -1,0 +1,9 @@
+@use '../../colors';
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background-color: colors.$sidebar-color;
+  width: 20%;
+  padding: 2%;
+}

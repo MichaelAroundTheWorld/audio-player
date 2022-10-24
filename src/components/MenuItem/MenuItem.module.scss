@@ -1,0 +1,33 @@
+@use '../../colors';
+
+a {
+  text-decoration: none;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  margin-bottom: 1.5%;
+
+  &.active {
+    .icon {
+      color: colors.$yellow;
+    }
+    .listItem {
+      color: colors.$yellow;
+    }
+  }
+
+  .icon {
+    color: colors.$mustard;
+  }
+
+  .listItem {
+    background-color: inherit;
+    border: none;
+    font-size: 1.2rem;
+    color: colors.$mustard;
+    cursor: pointer;
+  }
+}
