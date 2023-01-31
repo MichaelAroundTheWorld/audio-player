@@ -7,6 +7,10 @@ import AddIcon from '@mui/icons-material/Add';
 import CheckIcon from '@mui/icons-material/Check';
 import { FavouriteData, AddedTracks } from '../../data/data';
 import { CardType } from '../../data/data.module';
+import { useDispatch, useSelector } from 'react-redux';
+import { userActionTypes } from '../../store/types/User';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { waitForElementToBeRemoved } from '@testing-library/react';
 
 interface CardProps {
   item: CardType;
@@ -35,18 +39,26 @@ export const Card: FC<CardProps> = ({ item }) => {
     // }
   };
 
-  // useEffect(() => {
-  //   FavouriteData.map((item) => {
-  //     return console.log(item.isFavourite);
-  //   });
-  // }, [like]);
-
   const handleAddSongClick = (item: CardType) => {
     setAdded(true);
     const isAdded = AddedTracks.find((elem) => elem.id === item.id);
     if (!isAdded) {
       AddedTracks.push(item);
       item.isAdded = true;
+    }
+  };
+
+  const dispatch = useDispatch();
+  const favList = useTypedSelector((state) => state.favourite.items);
+  // console.log(favList);
+
+  // const favList = useSelector((state) => state);
+  // console.log(favList);
+
+  const setFavoutite = (item: CardType) => {
+    const isAdded = favList.find((elem) => elem.id === item.id);
+    if (!isAdded) {
+      dispatch({ type: userActionTypes.ADD_TO_FAVOURITES, payload: item });
     }
   };
 
@@ -58,10 +70,10 @@ export const Card: FC<CardProps> = ({ item }) => {
         <p className={styles.artist}>{item.artist}</p>
       </section>
       <div className={styles.likeButton}>
-        {like && item.isFavourite ? (
+        {favList.find((elem) => elem.id !== item.id) ? (
           <FavoriteIcon onClick={() => handleRemoveFav(item)} />
         ) : (
-          <FavoriteBorderIcon onClick={() => handleFavClick(item)} />
+          <FavoriteBorderIcon onClick={() => setFavoutite(item)} />
         )}
       </div>
       <div className={styles.addButton}>
